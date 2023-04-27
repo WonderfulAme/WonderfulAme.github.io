@@ -1,11 +1,10 @@
 ---
 layout: post
 title: "Hi"
-author: {{site.author}}
+
 ---
+{{page.title}}}
 
-
-{{page.author}}
 {{ site.description }}
 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
