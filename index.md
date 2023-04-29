@@ -3,7 +3,7 @@ layout: post
 title: "Hi"
 
 ---
-{{page.title}}}
+{{page.title}}
 
 {{ site.description }}
 
