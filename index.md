@@ -1,9 +1,3 @@
----
-layout: post
-title: "Hi"
-
----
-{{page.title}}
 
 {{ site.description }}
 
