@@ -2,7 +2,7 @@ title:  Ame's Thoughts on the world
 author: WonderfulAme
 theme: minima
 
-description: "Bienvenidos, terrícolas"
+description: "Planet Earth"
 
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
 excerpt_length: 50
@@ -13,11 +13,14 @@ feed_show_excerpt: true
 # Add a search button to the navbar
 post_search: true
 
+# Whether or not to show a list of tags below each post preview in the feed page
+feed_show_tags: true
+
 
 navbar-col: "#EAEAEA"
 navbar-text-col: "#404040"
 navbar-border-col: "#DDDDDD"
-page-col: "#FFFFFF"
+page-col: "#FFFF00"
 text-col: "#404040"
 link-col: "#008AFF"
 hover-col: "#0085A1"
