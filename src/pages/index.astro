@@ -1,0 +1,25 @@
+---
+// The bare address "/" sends visitors to Spanish, or English if their browser prefers it.
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>And AnOtter Thing</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta http-equiv="refresh" content="0; url=/es/" />
+		<script is:inline>
+			const lang = (navigator.languages?.[0] || navigator.language || 'es').toLowerCase();
+			location.replace(lang.startsWith('en') ? '/en/' : '/es/');
+		</script>
+		<style>
+			body { background: #fdf6ec; color: #3d2b1f; font-family: system-ui, sans-serif; }
+			@media (prefers-color-scheme: dark) { body { background: #1f1915; color: #f3e6d8; } }
+		</style>
+	</head>
+	<body>
+		<p><a href="/es/">Español</a> · <a href="/en/">English</a></p>
+	</body>
+</html>

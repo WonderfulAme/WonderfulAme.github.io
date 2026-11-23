@@ -1,0 +1,69 @@
+---
+// A list of notes styled like a book's table of contents: title ······ date
+import { type Lang, formatDate } from '../i18n/ui';
+import { noteUrl, type Note } from '../lib/notes';
+
+interface Props {
+	notes: Note[];
+	lang: Lang;
+}
+const { notes, lang } = Astro.props;
+---
+
+<ul class="toc">
+	{
+		notes.map((note) => (
+			<li>
+				<span class="titulo">
+					<a href={noteUrl(note)}>{note.data.title}</a>
+					{note.data.series && <sup class="etiqueta">{note.data.series}</sup>}
+				</span>
+				<span class="puntos" aria-hidden="true" />
+				<time datetime={note.data.date.toISOString().slice(0, 10)}>{formatDate(note.data.date, lang, 'short')}</time>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.toc {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5rem;
+	}
+	li {
+		display: flex;
+		align-items: last baseline; /* puntos y fecha van en el último renglón del título */
+		gap: 0.6rem;
+		margin-bottom: 0.6rem;
+	}
+	.titulo {
+		flex: 0 1 auto;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	.etiqueta {
+		margin-left: 0.3rem;
+		font-size: 0.7em;
+		font-style: italic;
+		color: var(--rojo);
+		white-space: nowrap;
+	}
+	/* la línea de puntitos entre el título y la fecha */
+	.puntos {
+		flex: 1 1 1.5rem;
+		min-width: 1.5rem;
+		border-bottom: 2px dotted var(--linea);
+		transform: translateY(-0.3em);
+	}
+	time {
+		flex: none;
+		color: var(--suave);
+		font-variant-numeric: oldstyle-nums;
+		white-space: nowrap;
+	}
+</style>

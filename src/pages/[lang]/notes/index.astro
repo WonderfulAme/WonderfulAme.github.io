@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoteList from '../../../components/NoteList.astro';
+import { type Lang, useTranslations, langPaths } from '../../../i18n/ui';
+import { getNotes } from '../../../lib/notes';
+
+export const getStaticPaths = langPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const notes = await getNotes(lang);
+---
+
+<BaseLayout lang={lang} title={t('notes.title')}>
+	<h1>{t('notes.title')}</h1>
+	<p class="center muted"><em>{t('notes.intro')}</em></p>
+	<hr />
+	{notes.length === 0 ? <p class="center">{t('notes.empty')}</p> : <NoteList notes={notes} lang={lang} />}
+</BaseLayout>

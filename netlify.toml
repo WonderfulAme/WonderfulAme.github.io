@@ -1,0 +1,8 @@
+# Configuración para publicar en Netlify
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 7 necesita Node 22.23 o más nuevo
+  NODE_VERSION = "24"

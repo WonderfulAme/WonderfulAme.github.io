@@ -1,0 +1,36 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { type Lang, langs, otherLang, formatDate } from '../../../i18n/ui';
+import { getNotes, noteSlug, noteUrl, findTranslation, type Note } from '../../../lib/notes';
+
+export async function getStaticPaths() {
+	const paths = [];
+	for (const lang of langs) {
+		for (const note of await getNotes(lang)) {
+			paths.push({ params: { lang, slug: noteSlug(note) }, props: { note } });
+		}
+	}
+	return paths;
+}
+
+const { note } = Astro.props as { note: Note };
+const lang = Astro.params.lang as Lang;
+const { Content } = await render(note);
+
+const other = otherLang(lang);
+const translation = await findTranslation(note, other);
+const switchHref = translation ? noteUrl(translation) : `/${other}/notes/`;
+---
+
+<BaseLayout lang={lang} title={note.data.title} description={note.data.description} switchHref={switchHref}>
+	<article>
+		{note.data.series && <p class="center muted"><em>{note.data.series}</em></p>}
+		<h1>{note.data.title}</h1>
+		<p class="center muted">{formatDate(note.data.date, lang)}</p>
+		<hr />
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>

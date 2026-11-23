@@ -1,0 +1,213 @@
+/* SECCION Colores */
+:root {
+	--pergamino: #f3ead3;
+	--papel: #fbf6e9;
+	--tinta: #2e2619;
+	--sepia: #6c5732;
+	--hongo: #a8352f;
+	--musgo: #4a5d3a;
+	--bosque: #283227;
+	--agua: #2c7268;
+	--ocre: #b8935a;
+	--rosa: #d98c96;
+	--azul-alicia: #8fb3d9;
+
+	--fondo: #ffffff; /* la hoja donde va el contenido */
+	--cuadro-claro: var(--pergamino); /* color de fondo mientras carga la teselación */
+	--texto: var(--tinta);
+	--suave: var(--sepia);
+	--rojo: var(--hongo);
+	--linea: #d8ccb0;
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--fondo: #221d16;
+		--cuadro-claro: #2e271d;
+		--texto: #e9dfc8;
+		--suave: #b5a37f;
+		--rojo: #d9786f;
+		--linea: #4a4030;
+		color-scheme: dark;
+	}
+}
+
+/* SECCION Libro */
+/* afuera: una teselación al azar (la dibuja src/scripts/teselaciones.ts) */
+html {
+	background: var(--cuadro-claro);
+}
+
+.teselacion {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	pointer-events: none;
+}
+
+/* adentro: la hoja blanca. Ocupa 3/5 del ancho (en pantallas angostas, casi todo) */
+body {
+	box-sizing: border-box;
+	width: max(60%, min(40rem, 100% - 2rem));
+	margin: 3rem auto;
+	padding: 3rem clamp(16px, 6vw, 6rem) 2.5rem;
+	background: var(--fondo);
+	box-shadow: 0 4px 24px rgba(46, 38, 25, 0.18);
+	color: var(--texto);
+	/* Georgia ya viene en el computador: no se descarga nada.
+	   Para volver a EB Garamond: pon 'EB Garamond' al inicio y descomenta el <link> en BaseLayout.astro */
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 1.15rem;
+	line-height: 1.6;
+	overflow-wrap: break-word; /* long links wrap instead of overflowing on phones */
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 400;
+	line-height: 1.25;
+	margin: 2.5rem 0 1rem;
+}
+
+h1 {
+	font-size: 2rem;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+h2 {
+	font-size: 1.05rem;
+	font-variant: small-caps;
+	letter-spacing: 0.08em;
+	text-transform: lowercase;
+	color: var(--rojo);
+}
+
+h3 {
+	font-size: 1.2rem;
+	font-style: italic;
+}
+
+p {
+	margin: 0 0 1rem;
+	hyphens: auto;
+}
+
+a {
+	color: inherit;
+	text-decoration-color: var(--suave);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--rojo);
+	text-decoration-color: var(--rojo);
+}
+
+hr {
+	border: 0;
+	text-align: center;
+	margin: 2.5rem 0;
+}
+
+hr::after {
+	content: '❧';
+	color: var(--suave);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.muted {
+	color: var(--suave);
+}
+
+.center {
+	text-align: center;
+}
+
+/* listas sin viñetas, como un índice */
+.index {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1rem;
+}
+
+.index li {
+	margin-bottom: 0.5rem;
+}
+
+/* SECCION Notas */
+.prose blockquote {
+	margin: 1.5rem 2rem;
+	font-style: italic;
+}
+
+.prose table {
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 1rem;
+}
+
+.prose th,
+.prose td {
+	padding: 0.3rem 0.75rem;
+	border-bottom: 1px solid var(--linea);
+	text-align: left;
+	vertical-align: top;
+}
+
+.prose th {
+	font-weight: 400;
+	font-variant: small-caps;
+	letter-spacing: 0.05em;
+}
+
+.prose img {
+	display: block;
+	margin: 2rem auto;
+	max-height: 24rem;
+	width: auto;
+}
+
+.prose code {
+	font-size: 0.85em;
+}
+
+.prose .katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+/* SECCION Inicial: la letra grande al empezar cada nota, impresa en dos tintas (hongo y ocre) */
+.prose > p:first-of-type {
+	display: flow-root; /* la letra grande no se mete en el párrafo siguiente */
+}
+
+.inicial {
+	float: left;
+	font-family: 'IM Fell English', Georgia, serif;
+	font-size: 4.4em;
+	line-height: 0.82;
+	padding: 0.06em 0.12em 0 0;
+	color: var(--rojo);
+	text-shadow: 0.05em 0.05em 0 var(--ocre);
+}
+
+/* el ¡ o ¿ antes de la letra, pequeño */
+.inicial-signo {
+	font-family: Georgia, serif;
+	font-size: 0.4em;
+	vertical-align: 0.6em;
+	margin-right: 0.05em;
+	text-shadow: none;
+}

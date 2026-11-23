@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/ui';
+
+// One 404 page for both languages: Spanish first, English below.
+const es = useTranslations('es');
+const en = useTranslations('en');
+---
+
+<BaseLayout lang="es" title="404" switchHref="/en/">
+	<h1>{es('404.title')}</h1>
+	<p class="center">{es('404.text')}</p>
+	<p class="center"><a href="/es/">{es('404.home')}</a></p>
+	<hr />
+	<p class="center muted" lang="en">{en('404.text')}</p>
+	<p class="center" lang="en"><a href="/en/">{en('404.home')}</a></p>
+</BaseLayout>

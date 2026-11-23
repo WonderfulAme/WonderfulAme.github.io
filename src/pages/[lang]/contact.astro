@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { type Lang, useTranslations, langPaths } from '../../i18n/ui';
+import { links } from '../../data/site';
+
+export const getStaticPaths = langPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('contact.title')}>
+	<h1>{t('contact.title')}</h1>
+	<p class="center muted"><em>{t('contact.intro')}</em></p>
+
+	<ul class="index center">
+		{
+			links.map((l) => (
+				<li>
+					<a href={l.url} rel={l.url.startsWith('http') ? 'me noopener' : undefined}>
+						{l.label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

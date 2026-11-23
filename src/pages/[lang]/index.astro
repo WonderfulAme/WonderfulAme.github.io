@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Otter from '../../components/Otter.astro';
+import NoteList from '../../components/NoteList.astro';
+import { type Lang, useTranslations, langPaths } from '../../i18n/ui';
+import { getNotes } from '../../lib/notes';
+
+export const getStaticPaths = langPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const latest = (await getNotes(lang)).slice(0, 5);
+---
+
+<BaseLayout lang={lang}>
+	<section class="bienvenida">
+		<Otter height={220} />
+		<div>
+			<h1>{t('home.hello')}</h1>
+			<p><em>{t('home.tagline')}</em></p>
+		</div>
+	</section>
+
+	<hr />
+
+	<p>{t('home.about')}</p>
+
+	<h2>{t('home.latestNotes')}</h2>
+	<NoteList notes={latest} lang={lang} />
+	<p><a href={`/${lang}/notes/`}>{t('home.allNotes')}</a></p>
+</BaseLayout>
+
+<style>
+	/* nutria a la izquierda, bienvenida a la derecha (en celular, una encima de la otra) */
+	.bienvenida {
+		display: flex;
+		align-items: center;
+		gap: 2.5rem;
+	}
+	.bienvenida :global(.otter) {
+		margin: 0;
+		flex-shrink: 0;
+	}
+	.bienvenida h1 {
+		text-align: left;
+		margin: 0 0 0.75rem;
+	}
+	.bienvenida p {
+		margin: 0;
+	}
+	@media (max-width: 34rem) {
+		.bienvenida {
+			flex-direction: column;
+			gap: 1rem;
+			text-align: center;
+		}
+		.bienvenida h1 {
+			text-align: center;
+		}
+	}
+</style>

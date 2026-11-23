@@ -1,0 +1,124 @@
+---
+// The frame shared by every page: <head>, a title line with links, and a footer.
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import { type Lang, useTranslations, otherLang, languages } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+	title?: string;
+	description?: string;
+	/** Where the "switch language" link goes. Defaults to the same page in the other language. */
+	switchHref?: string;
+}
+
+const { lang, title, description, switchHref } = Astro.props;
+const t = useTranslations(lang);
+const other = otherLang(lang);
+
+const pageTitle = title ? `${title} · ${t('site.title')}` : t('site.title');
+const path = Astro.url.pathname;
+const altHref = switchHref ?? path.replace(new RegExp(`^/${lang}(/|$)`), `/${other}/`);
+
+const nav = [
+	{ href: `/${lang}/notes/`, label: t('nav.notes') },
+	{ href: `/${lang}/projects/`, label: t('nav.projects') },
+	{ href: `/${lang}/contact/`, label: t('nav.contact') },
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description ?? t('site.description')} />
+		<link rel="alternate" hreflang={other} href={altHref} />
+		<!-- Letra de las iniciales: solo se descargan las mayúsculas (unos pocos KB) -->
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=IM+Fell+English&text=ABCDEFGHIJKLMNOPQRSTUVWXYZ%C3%81%C3%89%C3%8D%C3%93%C3%9A%C3%91%C3%9C&display=swap"
+			rel="stylesheet"
+		/>
+		<slot name="head" />
+		<!-- Letra EB Garamond (unos 100 KB). Descomenta para usarla en vez de Georgia:
+		<link
+			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&display=swap"
+			rel="stylesheet"
+		/>
+		-->
+	</head>
+	<body>
+		<header>
+			<a class="site" href={`/${lang}/`}>{t('site.title')}</a>
+			<nav aria-label="Main">
+				{nav.map((item) => <a href={item.href}>{item.label}</a>)}
+				<a href={altHref} hreflang={other} lang={other}>{languages[other]}</a>
+			</nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer>
+			<hr />
+			<p>Amelia · {new Date().getFullYear()}</p>
+			<p class="tesela" id="teselacion"></p>
+		</footer>
+
+		<script>
+			import '../scripts/teselaciones.ts';
+		</script>
+	</body>
+</html>
+
+<style>
+	header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+	.site {
+		font-variant: small-caps;
+		letter-spacing: 0.12em;
+		font-size: 1.1rem;
+		text-decoration: none;
+	}
+	nav {
+		margin-top: 0.25rem;
+		font-style: italic;
+		font-size: 1.05rem;
+		color: var(--suave);
+	}
+	nav a {
+		color: var(--suave);
+		text-decoration: none;
+	}
+	nav a:hover {
+		color: var(--rojo);
+	}
+	nav a + a::before {
+		content: '·';
+		display: inline-block;
+		margin: 0 0.6rem;
+		color: var(--suave);
+	}
+	.tesela {
+		font-variant: normal;
+		letter-spacing: 0;
+		font-style: italic;
+		font-size: 0.85rem;
+		margin: 0;
+	}
+	footer {
+		margin-top: 4rem;
+		text-align: center;
+		font-size: 1rem;
+		color: var(--suave);
+		font-variant: small-caps;
+		letter-spacing: 0.08em;
+	}
+</style>

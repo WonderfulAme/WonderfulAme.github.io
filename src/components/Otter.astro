@@ -1,0 +1,19 @@
+---
+// Amelia's top-hat otter. Use it like: <Otter height={200} />
+import nutria from '../assets/nutria.svg';
+
+interface Props {
+	height?: number;
+}
+const { height = 160 } = Astro.props;
+const width = Math.round((height * nutria.width) / nutria.height);
+---
+
+<img src={nutria.src} width={width} height={height} alt="" class="otter" decoding="async" />
+
+<style>
+	.otter {
+		display: block;
+		margin: 0 auto;
+	}
+</style>

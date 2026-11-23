@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { type Lang, useTranslations, langPaths } from '../../i18n/ui';
+import { projects } from '../../data/site';
+
+export const getStaticPaths = langPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+// Internal links that start with /es/ point to the visitor's language instead.
+const localize = (link: string) => link.replace(/^\/(es|en)\//, `/${lang}/`);
+---
+
+<BaseLayout lang={lang} title={t('projects.title')}>
+	<h1>{t('projects.title')}</h1>
+	<p class="center muted"><em>{t('projects.intro')}</em></p>
+
+	{
+		projects.map((p) => (
+			<>
+				<h3>{p.link ? <a href={localize(p.link)}>{p.title[lang]}</a> : p.title[lang]}</h3>
+				<p>{p.description[lang]}</p>
+			</>
+		))
+	}
+</BaseLayout>
