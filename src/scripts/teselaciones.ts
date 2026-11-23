@@ -127,5 +127,5 @@ addEventListener('resize', () => {
 const label = document.getElementById('teselacion');
 if (label) {
 	const en = document.documentElement.lang === 'en';
-	label.textContent = (en ? 'Background tiling: ' : 'Teselación de fondo: ') + (en ? base.en : base.es);
+	label.textContent = (en ? 'Tiling: ' : 'Teselación: ') + (en ? base.en : base.es);
 }

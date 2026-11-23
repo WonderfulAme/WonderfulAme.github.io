@@ -241,10 +241,8 @@ class HatTile {
 class MetaTile {
 	children: { T: M; geom: HatTile | MetaTile }[] = [];
 	shape: P[];
-	width: number;
-	constructor(shape: P[], width: number) {
+	constructor(shape: P[]) {
 		this.shape = shape;
-		this.width = width;
 	}
 	addChild(T: M, geom: HatTile | MetaTile) {
 		this.children.push({ T, geom });
@@ -279,20 +277,20 @@ function hatInit() {
 	const F_hat = new HatTile('F');
 
 	const H_outline = [pt(0, 0), pt(4, 0), pt(4.5, hr3), pt(2.5, 5 * hr3), pt(1.5, 5 * hr3), pt(-0.5, hr3)];
-	const H = new MetaTile(H_outline, 2);
+	const H = new MetaTile(H_outline);
 	H.addChild(matchTwo(hat_outline[5], hat_outline[7], H_outline[5], H_outline[0]), H_hat);
 	H.addChild(matchTwo(hat_outline[9], hat_outline[11], H_outline[1], H_outline[2]), H_hat);
 	H.addChild(matchTwo(hat_outline[5], hat_outline[7], H_outline[3], H_outline[4]), H_hat);
 	H.addChild(mul(ttrans(2.5, hr3), mul([-0.5, -hr3, 0, hr3, -0.5, 0], [0.5, 0, 0, 0, -0.5, 0])), H1_hat);
 
-	const T = new MetaTile([pt(0, 0), pt(3, 0), pt(1.5, 3 * hr3)], 2);
+	const T = new MetaTile([pt(0, 0), pt(3, 0), pt(1.5, 3 * hr3)]);
 	T.addChild([0.5, 0, 0.5, 0, 0.5, hr3], T_hat);
 
-	const P = new MetaTile([pt(0, 0), pt(4, 0), pt(3, 2 * hr3), pt(-1, 2 * hr3)], 2);
+	const P = new MetaTile([pt(0, 0), pt(4, 0), pt(3, 2 * hr3), pt(-1, 2 * hr3)]);
 	P.addChild([0.5, 0, 1.5, 0, 0.5, hr3], P_hat);
 	P.addChild(mul(ttrans(0, 2 * hr3), mul([0.5, hr3, 0, -hr3, 0.5, 0], [0.5, 0.0, 0.0, 0.0, 0.5, 0.0])), P_hat);
 
-	const F = new MetaTile([pt(0, 0), pt(3, 0), pt(3.5, hr3), pt(3, 2 * hr3), pt(-1, 2 * hr3)], 2);
+	const F = new MetaTile([pt(0, 0), pt(3, 0), pt(3.5, hr3), pt(3, 2 * hr3), pt(-1, 2 * hr3)]);
 	F.addChild([0.5, 0, 1.5, 0, 0.5, hr3], F_hat);
 	F.addChild(mul(ttrans(0, 2 * hr3), mul([0.5, hr3, 0, -hr3, 0.5, 0], [0.5, 0.0, 0.0, 0.0, 0.5, 0.0])), F_hat);
 
@@ -331,7 +329,7 @@ function constructPatch(H: MetaTile, T: MetaTile, P: MetaTile, F: MetaTile) {
 		[9, 4, 0, 2, 'T', 2],
 		[4, 0, 'F', 3],
 	];
-	const ret = new MetaTile([], H.width);
+	const ret = new MetaTile([]);
 	const shapes: Record<string, MetaTile> = { H, T, P, F };
 	const shapeOf = (n: number) => (ret.children[n].geom as MetaTile).shape;
 
@@ -379,22 +377,22 @@ function constructMetatiles(patch: MetaTile) {
 	new_H_outline.push(psub(new_H_outline[3], w));
 	new_H_outline.push(patch.evalChild(6, 2));
 
-	const new_H = new MetaTile(new_H_outline, patch.width * 2);
+	const new_H = new MetaTile(new_H_outline);
 	for (const ch of [0, 9, 16, 27, 26, 6, 1, 8, 10, 15]) new_H.addChild(patch.children[ch].T, patch.children[ch].geom);
 
 	const new_P_outline = [p72, padd(p72, psub(bps1, llc)), bps1, llc];
-	const new_P = new MetaTile(new_P_outline, patch.width * 2);
+	const new_P = new MetaTile(new_P_outline);
 	for (const ch of [7, 2, 3, 4, 28]) new_P.addChild(patch.children[ch].T, patch.children[ch].geom);
 
 	const new_F_outline = [bps2, patch.evalChild(24, 2), patch.evalChild(25, 0), p252, padd(p252, psub(llc, bps1))];
-	const new_F = new MetaTile(new_F_outline, patch.width * 2);
+	const new_F = new MetaTile(new_F_outline);
 	for (const ch of [21, 20, 22, 23, 24, 25]) new_F.addChild(patch.children[ch].T, patch.children[ch].geom);
 
 	const AAA = new_H_outline[2];
 	const BBB = padd(new_H_outline[1], psub(new_H_outline[4], new_H_outline[5]));
 	const CCC = transPt(rotAbout(BBB, -PI / 3), AAA);
 	const new_T_outline = [BBB, CCC, AAA];
-	const new_T = new MetaTile(new_T_outline, patch.width * 2);
+	const new_T = new MetaTile(new_T_outline);
 	new_T.addChild(patch.children[11].T, patch.children[11].geom);
 
 	new_H.recentre();

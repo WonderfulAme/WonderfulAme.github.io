@@ -3,7 +3,6 @@ title: "Capítulo 1 - Donde Luci Encuentra Unos Cuantos Números Muy Poco Racion
 description: "Fundamentos de los números reales."
 date: 2025-11-09
 series: "Análisis Real"
-order: 1
 ---
 
 El Rey Ratón, que antes vivía en la casa de Luci y Kit Mahogany, volvió a ella a su pesar. La casa de tres pisos, que en otro tiempo le resultaba acogedora, ahora lo hacía sentir pequeño. Se quitó la corona y la capa, y las dejó junto al cetro en el lugar más escondido que pudo encontrar; todavía podrían rondar por allí ratones incivilizados para quienes robar no era un crimen. Luego comenzó a buscar el viejo estudio donde la pareja de ancianos pasaba sus días de jubilación leyendo libros.

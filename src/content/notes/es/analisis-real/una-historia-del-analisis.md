@@ -3,7 +3,6 @@ title: "Una Historia del Análisis"
 description: "Luci, Kit y el Rey Ratón recorren el análisis real, capítulo por capítulo."
 date: 2025-11-09
 series: "Análisis Real"
-order: 0
 ---
 
 La siguiente historia está basada en el libro:

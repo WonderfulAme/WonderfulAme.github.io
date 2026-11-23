@@ -1,16 +1,10 @@
 /* SECCION Colores */
 :root {
 	--pergamino: #f3ead3;
-	--papel: #fbf6e9;
 	--tinta: #2e2619;
 	--sepia: #6c5732;
 	--hongo: #a8352f;
-	--musgo: #4a5d3a;
-	--bosque: #283227;
-	--agua: #2c7268;
 	--ocre: #b8935a;
-	--rosa: #d98c96;
-	--azul-alicia: #8fb3d9;
 
 	--fondo: #ffffff; /* la hoja donde va el contenido */
 	--cuadro-claro: var(--pergamino); /* color de fondo mientras carga la teselación */
@@ -57,8 +51,7 @@ body {
 	background: var(--fondo);
 	box-shadow: 0 4px 24px rgba(46, 38, 25, 0.18);
 	color: var(--texto);
-	/* Georgia ya viene en el computador: no se descarga nada.
-	   Para volver a EB Garamond: pon 'EB Garamond' al inicio y descomenta el <link> en BaseLayout.astro */
+	/* Georgia ya viene en el computador: no se descarga ninguna letra */
 	font-family: Georgia, 'Times New Roman', serif;
 	font-size: 1.15rem;
 	line-height: 1.6;

@@ -10,9 +10,8 @@ const notes = defineCollection({
 		title: z.string(),
 		description: z.string().optional(),
 		date: z.coerce.date(),
-		// Optional: group notes into a series (e.g. "Análisis Real") and order them inside it.
+		// Optional: the series a note belongs to (e.g. "Análisis Real"), shown next to its title.
 		series: z.string().optional(),
-		order: z.number().optional(),
 		// Optional: give a note and its translation the same key so the language switch links them.
 		translationKey: z.string().optional(),
 		draft: z.boolean().default(false),

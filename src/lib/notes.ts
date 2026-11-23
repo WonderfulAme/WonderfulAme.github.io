@@ -20,13 +20,6 @@ export async function getNotes(lang: Lang) {
 	return notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-/** Notes of one series in reading order. */
-export function sortSeries(notes: Note[]) {
-	return [...notes].sort(
-		(a, b) => (a.data.order ?? 0) - (b.data.order ?? 0) || a.data.title.localeCompare(b.data.title),
-	);
-}
-
 /** The same note in the other language, if one has the same translationKey. */
 export async function findTranslation(note: Note, lang: Lang) {
 	if (!note.data.translationKey) return undefined;

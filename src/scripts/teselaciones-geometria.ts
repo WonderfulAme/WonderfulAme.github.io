@@ -89,16 +89,16 @@ function dual(t: Tiling, es: string, en: string): Tiling {
 const square: Pt[] = [[0, 0], [1, 0], [1, 1], [0, 1]];
 
 const cuadrada: Tiling = {
-	es: 'Cuadrada (4.4.4.4)',
-	en: 'Square (4.4.4.4)',
+	es: 'Cuadrada',
+	en: 'Square',
 	a: [1, 0],
 	b: [0, 1],
 	tiles: [{ pts: square, color: (i, j) => mod(i + j, 2) }],
 };
 
 const triangular: Tiling = {
-	es: 'Triangular (3.3.3.3.3.3)',
-	en: 'Triangular (3.3.3.3.3.3)',
+	es: 'Triangular',
+	en: 'Triangular',
 	a: [1, 0],
 	b: [0.5, h],
 	tiles: [
@@ -108,8 +108,8 @@ const triangular: Tiling = {
 };
 
 const hexagonal: Tiling = {
-	es: 'Hexagonal (6.6.6)',
-	en: 'Hexagonal (6.6.6)',
+	es: 'Hexagonal',
+	en: 'Hexagonal',
 	a: [R3, 0],
 	b: [R3 / 2, 1.5],
 	tiles: [{ pts: ngon(6, 1, 30), color: (i, j) => mod(i - j, 3) }],
@@ -118,8 +118,8 @@ const hexagonal: Tiling = {
 // SECCION Arquimedianas (8)
 
 const trihexagonal: Tiling = {
-	es: 'Trihexagonal (3.6.3.6)',
-	en: 'Trihexagonal (3.6.3.6)',
+	es: 'Trihexagonal',
+	en: 'Trihexagonal',
 	a: [2, 0],
 	b: [1, R3],
 	tiles: [
@@ -131,8 +131,8 @@ const trihexagonal: Tiling = {
 
 const L488 = 1 + Math.SQRT2;
 const cuadradaTruncada: Tiling = {
-	es: 'Cuadrada truncada (4.8.8)',
-	en: 'Truncated square (4.8.8)',
+	es: 'Cuadrada truncada',
+	en: 'Truncated square',
 	a: [L488, 0],
 	b: [0, L488],
 	tiles: [
@@ -157,8 +157,8 @@ const triangularAlargada: Tiling = {
 const D3464 = 1 + R3;
 const sq3464: Pt[] = [[h, -0.5], [h + 1, -0.5], [h + 1, 0.5], [h, 0.5]];
 const rombitrihexagonal: Tiling = {
-	es: 'Rombitrihexagonal (3.4.6.4)',
-	en: 'Rhombitrihexagonal (3.4.6.4)',
+	es: 'Rombitrihexagonal',
+	en: 'Rhombitrihexagonal',
 	a: [D3464, 0],
 	b: [D3464 / 2, (D3464 * R3) / 2],
 	tiles: [
@@ -176,8 +176,8 @@ const ap12 = (2 + R3) / 2; // apotema del dodecágono de lado 1
 const D4612 = 3 + R3;
 const sq4612: Pt[] = [[ap12, -0.5], [ap12 + 1, -0.5], [ap12 + 1, 0.5], [ap12, 0.5]];
 const trihexagonalTruncada: Tiling = {
-	es: 'Trihexagonal truncada (4.6.12)',
-	en: 'Truncated trihexagonal (4.6.12)',
+	es: 'Trihexagonal truncada',
+	en: 'Truncated trihexagonal',
 	a: [D4612, 0],
 	b: [D4612 / 2, (D4612 * R3) / 2],
 	tiles: [
@@ -193,8 +193,8 @@ const trihexagonalTruncada: Tiling = {
 // dodecágonos que se tocan por un lado; triángulos en los huecos
 const D31212 = 2 + R3;
 const hexagonalTruncada: Tiling = {
-	es: 'Hexagonal truncada (3.12.12)',
-	en: 'Truncated hexagonal (3.12.12)',
+	es: 'Hexagonal truncada',
+	en: 'Truncated hexagonal',
 	a: [D31212, 0],
 	b: [D31212 / 2, (D31212 * R3) / 2],
 	tiles: [
@@ -222,7 +222,7 @@ function hexagonalAchatadaTiles(): Tiling {
 				all.push({ pts: [at(m + 1, n), at(m + 1, n + 1), at(m, n + 1)], color: 2 });
 		}
 	}
-	return { es: 'Hexagonal achatada (3.3.3.3.6)', en: 'Snub hexagonal (3.3.3.3.6)', a, b, tiles: inCell(all, a, b) };
+	return { es: 'Hexagonal achatada', en: 'Snub hexagonal', a, b, tiles: inCell(all, a, b) };
 }
 const hexagonalAchatada = hexagonalAchatadaTiles();
 
@@ -233,8 +233,8 @@ const cB: Pt = [LSnub / 2, LSnub / 2];
 const A = (deg: number) => polar(rSq, deg);
 const B = (deg: number) => polar(rSq, deg, cB);
 const cuadradaAchatada: Tiling = {
-	es: 'Cuadrada achatada (3.3.4.3.4)',
-	en: 'Snub square (3.3.4.3.4)',
+	es: 'Cuadrada achatada',
+	en: 'Snub square',
 	a: [LSnub, 0],
 	b: [0, LSnub],
 	tiles: [
@@ -248,14 +248,6 @@ const cuadradaAchatada: Tiling = {
 };
 
 // SECCION Otras
-
-const ladrillos: Tiling = {
-	es: 'Ladrillos',
-	en: 'Bricks',
-	a: [2, 0],
-	b: [1, 1],
-	tiles: [{ pts: [[0, 0], [2, 0], [2, 1], [0, 1]], color: (_, j) => mod(j, 2) }],
-};
 
 const espiga: Tiling = {
 	es: 'Espiga',
@@ -297,8 +289,8 @@ function casitas(): Tiling {
 	const t: Pt = add(peak, [1 + sx, w]);
 	const down: Pt[] = up.map(([x, y]) => [t[0] - x, t[1] - y]);
 	return {
-		es: 'Pentagonal tipo 1: casitas (forma al azar)',
-		en: 'Pentagonal type 1: little houses (random shape)',
+		es: 'Casitas',
+		en: 'Little houses',
 		a: [1, 0],
 		b: [t[0] - 1, t[1]],
 		tiles: [
@@ -315,8 +307,8 @@ const hexA: Pt = polar(R3, 30);
 const hexB: Pt = [0, R3];
 
 const hexagonosEnDos: Tiling = {
-	es: 'Pentagonal tipo 1: hexágonos partidos en dos',
-	en: 'Pentagonal type 1: hexagons cut in two',
+	es: 'Hexágonos partidos en dos',
+	en: 'Hexagons cut in two',
 	a: hexA,
 	b: hexB,
 	tiles: [
@@ -326,8 +318,8 @@ const hexagonosEnDos: Tiling = {
 };
 
 const hexagonosEnTres: Tiling = {
-	es: 'Pentagonal tipo 3: hexágonos partidos en tres',
-	en: 'Pentagonal type 3: hexagons cut in three',
+	es: 'Hexágonos partidos en tres',
+	en: 'Hexagons cut in three',
 	a: hexA,
 	b: hexB,
 	tiles: [
@@ -389,8 +381,8 @@ function penroseRombos(radius: number, side: number) {
 }
 
 const penrose: Patch = {
-	es: 'Penrose, rombos (P3, aperiódica)',
-	en: 'Penrose rhombs (P3, aperiodic)',
+	es: 'Penrose con rombos',
+	en: 'Penrose rhombs',
 	patch: penroseRombos,
 };
 
@@ -410,14 +402,14 @@ export const TESELACIONES: (Tiling | Patch)[] = [
 	hexagonalAchatada,
 	cuadradaAchatada,
 	// de Laves (duales de las arquimedianas)
-	dual(trihexagonal, 'Rómbica, o de cubos (Laves, dual de 3.6.3.6)', 'Rhombille (Laves, dual of 3.6.3.6)'),
-	dual(cuadradaTruncada, 'Tetrakis cuadrada (Laves, dual de 4.8.8)', 'Tetrakis square (Laves, dual of 4.8.8)'),
-	dual(triangularAlargada, 'Pentagonal prismática, tipo 1 (Laves, dual de 3.3.3.4.4)', 'Prismatic pentagonal, type 1 (Laves, dual of 3.3.3.4.4)'),
-	dual(rombitrihexagonal, 'Deltoidal trihexagonal (Laves, dual de 3.4.6.4)', 'Deltoidal trihexagonal (Laves, dual of 3.4.6.4)'),
-	dual(trihexagonalTruncada, 'Kisrómbica (Laves, dual de 4.6.12)', 'Kisrhombille (Laves, dual of 4.6.12)'),
-	dual(hexagonalTruncada, 'Triakis triangular (Laves, dual de 3.12.12)', 'Triakis triangular (Laves, dual of 3.12.12)'),
-	dual(hexagonalAchatada, 'Pentagonal florida, tipo 5 (Laves, dual de 3.3.3.3.6)', 'Floret pentagonal, type 5 (Laves, dual of 3.3.3.3.6)'),
-	dual(cuadradaAchatada, 'Pentagonal del Cairo, tipos 2 y 4 (Laves, dual de 3.3.4.3.4)', 'Cairo pentagonal, types 2 and 4 (Laves, dual of 3.3.4.3.4)'),
+	dual(trihexagonal, 'Rómbica', 'Rhombille'),
+	dual(cuadradaTruncada, 'Tetrakis cuadrada', 'Tetrakis square'),
+	dual(triangularAlargada, 'Pentagonal prismática', 'Prismatic pentagonal'),
+	dual(rombitrihexagonal, 'Deltoidal trihexagonal', 'Deltoidal trihexagonal'),
+	dual(trihexagonalTruncada, 'Kisrómbica', 'Kisrhombille'),
+	dual(hexagonalTruncada, 'Triakis triangular', 'Triakis triangular'),
+	dual(hexagonalAchatada, 'Pentagonal florida', 'Floret pentagonal'),
+	dual(cuadradaAchatada, 'Pentagonal del Cairo', 'Cairo pentagonal'),
 	// otras
 	espiga,
 	cesteria,
@@ -427,10 +419,10 @@ export const TESELACIONES: (Tiling | Patch)[] = [
 	hexagonosEnTres,
 	// aperiódicas: nunca se repiten
 	penrose,
-	{ es: 'Penrose, cometas y dardos (P2, aperiódica)', en: 'Penrose kites and darts (P2, aperiodic)', patch: penroseCometas },
-	{ es: 'Molinete de Conway y Radin (piezas en infinitas direcciones)', en: 'Conway–Radin pinwheel (tiles in infinitely many directions)', patch: molinete },
-	{ es: 'Ammann–Beenker (aperiódica, simetría de 8)', en: 'Ammann–Beenker (aperiodic, 8-fold symmetry)', patch: ammannBeenker },
-	{ es: 'El sombrero: el primer "einstein" (Smith, Myers, Kaplan y Goodman-Strauss, 2023)', en: 'The hat: the first "einstein" (Smith, Myers, Kaplan & Goodman-Strauss, 2023)', patch: sombrero },
+	{ es: 'Penrose con cometas y dardos', en: 'Penrose kites and darts', patch: penroseCometas },
+	{ es: 'Molinete de Conway y Radin', en: 'Conway–Radin pinwheel', patch: molinete },
+	{ es: 'Ammann–Beenker', en: 'Ammann–Beenker', patch: ammannBeenker },
+	{ es: 'El sombrero', en: 'The hat', patch: sombrero },
 ];
 
 /** Escala una teselación para que sus piezas midan, en promedio, `tileArea` px². */
