@@ -141,18 +141,6 @@ const cuadradaTruncada: Tiling = {
 	],
 };
 
-const triangularAlargada: Tiling = {
-	es: 'Triangular alargada (3.3.3.4.4)',
-	en: 'Elongated triangular (3.3.3.4.4)',
-	a: [1, 0],
-	b: [0.5, 1 + h],
-	tiles: [
-		{ pts: square, color: 0 },
-		{ pts: [[0, 1], [1, 1], [0.5, 1 + h]], color: 1 },
-		{ pts: [[1, 1], [1.5, 1 + h], [0.5, 1 + h]], color: 2 },
-	],
-};
-
 // hexágonos en una malla triangular, separados por cuadrados; triángulos en los huecos
 const D3464 = 1 + R3;
 const sq3464: Pt[] = [[h, -0.5], [h + 1, -0.5], [h + 1, 0.5], [h, 0.5]];
@@ -274,31 +262,7 @@ const cesteria: Tiling = {
 };
 
 // SECCION Pentágonos: de los 15 tipos de pentágonos convexos que teselan el plano, aquí están los tipos 1 a 5
-// (la pentagonal del Cairo es tipo 2 y 4, la florida es tipo 5 y la prismática es tipo 1).
-
-/**
- * Tipo 1, "casitas": base, dos paredes paralelas y un techo con la punta donde sea.
- * Una casita boca abajo (girada 180°) encaja siempre entre dos techos. La forma sale al azar cada vez.
- */
-function casitas(): Tiling {
-	const r = (min: number, max: number) => min + Math.random() * (max - min);
-	const w = r(0.5, 1); // alto de las paredes
-	const sx = r(-0.4, 0.4); // qué tan inclinadas
-	const peak: Pt = [sx + r(0.15, 0.85), w + r(0.25, 0.75)]; // punta del techo
-	const up: Pt[] = [[0, 0], [1, 0], [1 + sx, w], peak, [sx, w]];
-	const t: Pt = add(peak, [1 + sx, w]);
-	const down: Pt[] = up.map(([x, y]) => [t[0] - x, t[1] - y]);
-	return {
-		es: 'Casitas',
-		en: 'Little houses',
-		a: [1, 0],
-		b: [t[0] - 1, t[1]],
-		tiles: [
-			{ pts: up, color: (i) => mod(i, 2) },
-			{ pts: down, color: 2 },
-		],
-	};
-}
+// (la pentagonal del Cairo es tipo 2 y 4, y la florida es tipo 5).
 
 // hexágono regular (vértices V, puntos medios de los lados M) en su malla
 const V = ngon(6, 1, 0);
@@ -404,7 +368,6 @@ export const TESELACIONES: (Tiling | Patch)[] = [
 	// de Laves (duales de las arquimedianas)
 	dual(trihexagonal, 'Rómbica', 'Rhombille'),
 	dual(cuadradaTruncada, 'Tetrakis cuadrada', 'Tetrakis square'),
-	dual(triangularAlargada, 'Pentagonal prismática', 'Prismatic pentagonal'),
 	dual(rombitrihexagonal, 'Deltoidal trihexagonal', 'Deltoidal trihexagonal'),
 	dual(trihexagonalTruncada, 'Kisrómbica', 'Kisrhombille'),
 	dual(hexagonalTruncada, 'Triakis triangular', 'Triakis triangular'),
@@ -414,7 +377,6 @@ export const TESELACIONES: (Tiling | Patch)[] = [
 	espiga,
 	cesteria,
 	// pentágonos
-	casitas(),
 	hexagonosEnDos,
 	hexagonosEnTres,
 	// aperiódicas: nunca se repiten

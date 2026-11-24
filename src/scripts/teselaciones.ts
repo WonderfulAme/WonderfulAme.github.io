@@ -1,7 +1,7 @@
 // Fondo: una teselación del plano euclidiano, escogida al azar cada vez que se carga la página
 // (forma, colores, tamaño y ángulo). Se dibuja como un SVG fijo detrás de la hoja.
 // Las formas están en teselaciones-geometria.ts.
-// Para ver una en particular: agrega ?teselacion=N a la dirección (N del 0 al 27),
+// Para ver una en particular: agrega ?teselacion=N a la dirección (N del 0 al 25),
 // y ?tamano=N para escoger el tamaño (ej: /es/?teselacion=18&tamano=200).
 
 import { TESELACIONES, scaled } from './teselaciones-geometria.ts';
