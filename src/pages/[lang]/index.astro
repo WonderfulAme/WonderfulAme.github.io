@@ -26,13 +26,11 @@ const latest = (await getNotes(lang)).slice(0, 5);
 
 	<p>{t('home.about')}</p>
 
+	<Galleta lang={lang} />
+
 	<h2>{t('home.latestNotes')}</h2>
 	<Indice entries={latest.map(noteEntry)} lang={lang} />
 	<p><a href={`/${lang}/notes/`}>{t('home.allNotes')}</a></p>
-
-	<hr />
-
-	<Galleta lang={lang} />
 </BaseLayout>
 
 <style>
