@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/ui';
+import type { Entry } from './indice';
 
 export type Note = CollectionEntry<'notes'>;
 
@@ -26,3 +27,11 @@ export async function findTranslation(note: Note, lang: Lang) {
 	const all = await getNotes(lang);
 	return all.find((n) => n.data.translationKey === note.data.translationKey);
 }
+
+/** A note as a line of the table of contents. */
+export const noteEntry = (note: Note): Entry => ({
+	href: noteUrl(note),
+	title: note.data.title,
+	date: note.data.date,
+	tag: note.data.series,
+});

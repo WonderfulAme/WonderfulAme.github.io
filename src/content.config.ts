@@ -18,4 +18,15 @@ const notes = defineCollection({
 	}),
 });
 
-export const collections = { notes };
+// Every Markdown file in src/content/projects/ becomes a project page (es/ and en/, same file name).
+const projects = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+	schema: z.object({
+		title: z.string(),
+		date: z.coerce.date(),
+		// Position in the list on the Projects page (1 goes first).
+		order: z.number(),
+	}),
+});
+
+export const collections = { notes, projects };

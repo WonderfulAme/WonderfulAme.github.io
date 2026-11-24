@@ -1,25 +1,25 @@
 ---
-// A list of notes styled like a book's table of contents: title ······ date
+// A list styled like a book's table of contents: title ······ date
 import { type Lang, formatDate } from '../i18n/ui';
-import { noteUrl, type Note } from '../lib/notes';
+import type { Entry } from '../lib/indice';
 
 interface Props {
-	notes: Note[];
+	entries: Entry[];
 	lang: Lang;
 }
-const { notes, lang } = Astro.props;
+const { entries, lang } = Astro.props;
 ---
 
 <ul class="toc">
 	{
-		notes.map((note) => (
+		entries.map((entry) => (
 			<li>
 				<span class="titulo">
-					<a href={noteUrl(note)}>{note.data.title}</a>
-					{note.data.series && <sup class="etiqueta">{note.data.series}</sup>}
+					<a href={entry.href}>{entry.title}</a>
+					{entry.tag && <sup class="etiqueta">{entry.tag}</sup>}
 				</span>
 				<span class="puntos" aria-hidden="true" />
-				<time datetime={note.data.date.toISOString().slice(0, 10)}>{formatDate(note.data.date, lang, 'short')}</time>
+				<time datetime={entry.date.toISOString().slice(0, 10)}>{formatDate(entry.date, lang, 'short')}</time>
 			</li>
 		))
 	}

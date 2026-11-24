@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Otter from '../../components/Otter.astro';
-import NoteList from '../../components/NoteList.astro';
+import Indice from '../../components/Indice.astro';
+import Galleta from '../../components/Galleta.astro';
 import { type Lang, useTranslations, langPaths } from '../../i18n/ui';
-import { getNotes } from '../../lib/notes';
+import { getNotes, noteEntry } from '../../lib/notes';
 
 export const getStaticPaths = langPaths;
 
@@ -26,8 +27,12 @@ const latest = (await getNotes(lang)).slice(0, 5);
 	<p>{t('home.about')}</p>
 
 	<h2>{t('home.latestNotes')}</h2>
-	<NoteList notes={latest} lang={lang} />
+	<Indice entries={latest.map(noteEntry)} lang={lang} />
 	<p><a href={`/${lang}/notes/`}>{t('home.allNotes')}</a></p>
+
+	<hr />
+
+	<Galleta lang={lang} />
 </BaseLayout>
 
 <style>

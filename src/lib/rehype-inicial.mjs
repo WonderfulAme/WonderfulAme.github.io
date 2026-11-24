@@ -1,8 +1,12 @@
 // Wraps the first letter of each note's first paragraph in <span class="inicial">,
 // so it can be drawn as a big decorated initial (see .inicial in global.css).
 // Opening punctuation like ¡ ¿ « " goes inside the box, drawn small.
+// Short first paragraphs (like "Por completar.") don't get one: the initial needs text to wrap around it.
 
 const START = /^([\s¡¿«"“'‘(—–-]*)(\p{L})/u;
+const MIN_LENGTH = 80;
+
+const textOf = (node) => (node.type === 'text' ? node.value : (node.children ?? []).map(textOf).join(''));
 
 function firstText(node) {
 	for (const child of node.children ?? []) {
@@ -18,7 +22,7 @@ function firstText(node) {
 export default function rehypeInicial() {
 	return (tree) => {
 		const paragraph = tree.children.find((n) => n.type === 'element' && n.tagName === 'p');
-		if (!paragraph) return;
+		if (!paragraph || textOf(paragraph).length < MIN_LENGTH) return;
 		const found = firstText(paragraph);
 		if (!found) return;
 

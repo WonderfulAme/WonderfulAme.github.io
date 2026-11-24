@@ -1,0 +1,123 @@
+---
+// A cookie on the home page. Clicking it "picks it up": it gets eaten, a new one appears,
+// and the shared count (of everyone who has visited) goes up.
+import { type Lang, useTranslations } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+const t = useTranslations(Astro.props.lang);
+
+// chocolate chips: [x, y, radius]
+const chips: [number, number, number][] = [
+	[38, 34, 5], [62, 30, 4], [50, 52, 6], [30, 60, 4], [70, 58, 5], [56, 76, 4], [36, 80, 3.5], [76, 40, 3],
+];
+---
+
+<section class="galleta">
+	<h2>{t('cookie.title')}</h2>
+	<button type="button" aria-label={t('cookie.button')}>
+		<svg viewBox="0 0 100 100" width="96" height="96" aria-hidden="true">
+			<circle cx="50" cy="55" r="40" class="masa-borde"></circle>
+			<circle cx="50" cy="53" r="38" class="masa"></circle>
+			{chips.map(([x, y, r]) => <ellipse cx={x} cy={y} rx={r} ry={r * 0.8} class="chip" />)}
+		</svg>
+	</button>
+	<p class="muted" aria-live="polite">
+		<span class="aviso">{t('cookie.prompt')}</span>
+		<span class="cuenta" hidden>{t('cookie.count')} <strong></strong></span>
+	</p>
+</section>
+
+<script>
+	// Contador compartido (código en contador/): GET da el total, POST suma una galleta
+	const URL_CONTADOR = 'https://contador-galletas.contador-galletas.workers.dev/galletas';
+
+	const section = document.querySelector<HTMLElement>('.galleta');
+	if (section) {
+		const button = section.querySelector('button')!;
+		const cuenta = section.querySelector<HTMLElement>('.cuenta')!;
+		const number = cuenta.querySelector('strong')!;
+		let total = 0;
+
+		const show = (n: number) => {
+			total = n;
+			number.textContent = n.toLocaleString(document.documentElement.lang);
+			cuenta.hidden = false;
+		};
+		const ask = (method: 'GET' | 'POST') =>
+			fetch(URL_CONTADOR, { method })
+				.then((r) => r.json())
+				.then((data: { total: number }) => show(data.total))
+				.catch(() => {}); // sin conexión: la galleta se puede recoger igual
+
+		ask('GET');
+
+		button.addEventListener('click', () => {
+			if (button.classList.contains('comiendo')) return;
+			if (!cuenta.hidden) show(total + 1);
+			ask('POST');
+			button.classList.add('comiendo');
+			setTimeout(() => button.classList.remove('comiendo'), 650);
+		});
+	}
+</script>
+
+<style>
+	.galleta {
+		text-align: center;
+	}
+	button {
+		background: none;
+		border: 0;
+		padding: 0.25rem;
+		cursor: pointer;
+		border-radius: 50%;
+	}
+	button:hover svg {
+		transform: rotate(-8deg) scale(1.05);
+	}
+	button:focus-visible {
+		outline: 2px solid var(--rojo);
+		outline-offset: 4px;
+	}
+	svg {
+		display: block;
+		transition: transform 0.2s ease;
+	}
+	.masa-borde {
+		fill: #a8743f;
+	}
+	.masa {
+		fill: #d9a868;
+	}
+	.chip {
+		fill: #4a2f1d;
+	}
+	p {
+		margin-top: 0.5rem;
+	}
+	/* al recogerla: la galleta se va girando y aparece una nueva */
+	@media (prefers-reduced-motion: no-preference) {
+		.comiendo svg {
+			animation: recoger 0.65s ease;
+		}
+	}
+	@keyframes recoger {
+		0% {
+			transform: scale(1) rotate(0);
+		}
+		45% {
+			transform: scale(0) rotate(200deg);
+			opacity: 0;
+		}
+		55% {
+			transform: scale(0);
+			opacity: 0;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+</style>

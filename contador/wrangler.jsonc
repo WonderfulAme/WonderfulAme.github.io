@@ -1,0 +1,11 @@
+// Configuración del Worker en Cloudflare
+{
+	"name": "contador-galletas",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-11-01",
+	"durable_objects": {
+		"bindings": [{ "name": "CONTADOR", "class_name": "Contador" }]
+	},
+	// "new_sqlite_classes" es el tipo de Durable Object que incluye el plan gratis
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["Contador"] }]
+}

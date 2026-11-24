@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Indice from '../../../components/Indice.astro';
+import { type Lang, useTranslations, langPaths } from '../../../i18n/ui';
+import { getProjects, projectEntry } from '../../../lib/projects';
+
+export const getStaticPaths = langPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const projects = await getProjects(lang);
+---
+
+<BaseLayout lang={lang} title={t('projects.title')}>
+	<h1>{t('projects.title')}</h1>
+	<p class="center muted"><em>{t('projects.intro')}</em></p>
+	<hr />
+	<Indice entries={projects.map(projectEntry(lang))} lang={lang} />
+</BaseLayout>

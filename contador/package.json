@@ -1,0 +1,14 @@
+{
+  "name": "contador-galletas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261123.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.167.0"
+  }
+}

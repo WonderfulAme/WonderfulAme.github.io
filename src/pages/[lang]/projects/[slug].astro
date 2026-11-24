@@ -1,0 +1,31 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { type Lang, langs, formatDate } from '../../../i18n/ui';
+import { getProjects, projectSlug, type Project } from '../../../lib/projects';
+
+export async function getStaticPaths() {
+	const paths = [];
+	for (const lang of langs) {
+		for (const project of await getProjects(lang)) {
+			paths.push({ params: { lang, slug: projectSlug(project) }, props: { project } });
+		}
+	}
+	return paths;
+}
+
+const { project } = Astro.props as { project: Project };
+const lang = Astro.params.lang as Lang;
+const { Content } = await render(project);
+---
+
+<BaseLayout lang={lang} title={project.data.title}>
+	<article>
+		<h1>{project.data.title}</h1>
+		<p class="center muted">{formatDate(project.data.date, lang)}</p>
+		<hr />
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
