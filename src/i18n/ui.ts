@@ -16,7 +16,7 @@ export const ui = {
 		'home.hello': '¡Hola! Soy Amelia',
 		'home.tagline': 'Y esta es otra cosa más: mi rincón de internet para matemáticas, historias y proyectos.',
 		'home.about':
-			'Aquí puedes escribir un poco sobre ti: qué estudias, qué te gusta, qué te emociona aprender. Edita este texto en src/i18n/ui.ts.',
+			'Actualmente vivo en el planeta Tierra, con planes de mudarme pronto. Algunas de mis cosas favoritas son las nutrias, las nubes, los libros y los jardines. Estudio ingeniería física e ingeniería matemática, y las dos me encantan. Hice esta página para tener un registro de las cosas que he hecho con mi vida.',
 		'home.latestNotes': 'Notas recientes',
 		'home.allNotes': 'Ver todas las notas',
 		'cookie.title': 'Una galleta para ti',
@@ -43,7 +43,7 @@ export const ui = {
 		'home.hello': "Hi! I'm Amelia",
 		'home.tagline': 'And this is another thing: my corner of the internet for math, stories and projects.',
 		'home.about':
-			'Write a little about yourself here: what you study, what you enjoy, what you are excited to learn. Edit this text in src/i18n/ui.ts.',
+			'Nowadays I live on Planet Earth, with plans of moving soon. Some of my favourite things are otters, clouds, books and gardens. I am a student of engineering physics and mathematical engineering, both of which I love. I made this webpage to keep a record of the things I have done with my life.',
 		'home.latestNotes': 'Latest notes',
 		'home.allNotes': 'See all notes',
 		'cookie.title': 'A cookie for you',
